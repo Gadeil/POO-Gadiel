@@ -10,26 +10,30 @@ altura = float(input('Ingrese la altura del personaje: '))
 cargador = int(input('Ingrese la cantidad de municiones del personaje: '))
 print('')
 print('Ingrese los datos del ENEMIGO')
-especie = input('Ingrese la especie del personaje: ')
-nombre = input('Ingrese el nombre del personaje: ')
-altura = float(input('Ingrese la altura del personaje: '))
+especieV = input('Ingrese la especie del personaje: ')
+nombreV= input('Ingrese el nombre del personaje: ')
+alturaV = float(input('Ingrese la altura del perasonaje: '))
 
 
 
 
 #3. Crear el objeto
 
-Heroe = Personaje(especie,nombre,altura)
-vilano = Personaje(especie,nombre,altura)
+Heroe = personaje(especie,nombre,altura)
+vilano = personaje(especieV,nombreV,alturaV)
+
+
+#ejemplo del uso del set
+Heroe.setNombe(" pepe pecas ")
 
 #4. acceder a atributos y metodos de cada objeto
 
 print('Los datos del heroe son: ')
-print('El heroe es un '+Heroe.especie+' de nombre '+Heroe.nombre+' y mide '+str(Heroe.altura)+' metros')
+print('El heroe es un '+Heroe.getEspecie()+' de nombre '+Heroe.getNombre()+' y mide '+str(Heroe.getAltura())+' metros')
 print('')
 print('')
 print('Los datos del enemigo son: ')
-print('El enemigo es un '+vilano.especie+' de nombre '+vilano.nombre+' y mide '+str(vilano.altura)+' metros')
+print('El enemigo es un '+vilano.getEspecie()+' de nombre '+vilano.getNombre()+' y mide '+str(vilano.getAltura())+' metros')
 
 
 #5. Llamar a los metodos de cada objeto
@@ -37,6 +41,10 @@ print('El enemigo es un '+vilano.especie+' de nombre '+vilano.nombre+' y mide '+
 Heroe.correr(True)
 Heroe.lanzarGranada()
 Heroe.recargarArma(5)
+
+
+#Ejemplo de lo que no se puede hacer
+#Heroe.__pensar()
 
 vilano.correr(False)
 vilano.lanzarGranada()
