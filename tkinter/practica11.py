@@ -1,5 +1,21 @@
 
-from tkinter import Tk,Frame,Button
+from tkinter import Tk,Frame,Button,messagebox
+
+#4 Funcion de mensajes 
+def mostrarMensaje():
+    messagebox.showinfo("aviso","esta mensaje es para informar algo")
+    messagebox.showerror("error","nada puede malir sal")
+    messagebox.askokcancel("pregunta:","ella jugo conmigo")
+    print(messagebox.askyesnocancel("pregunta:","ELLA jugo conmigo"))
+    
+#5 Funcion para agregar botones
+
+def agregarBoton():
+    botonrojo.config(text = "+", bg = "green", fg = "white")
+    botonNuevo = Button(seccion3,text = "boton nuevo")
+    botonNuevo.pack()
+    
+    
 
 #1 crear ventana
 ventana = Tk()
@@ -20,15 +36,15 @@ seccion3.pack(expand=True,fill="both")
 botonRojo= Button(seccion1,text="boton rojo",fg="red")
 botonRojo.place(x=80, y=80)
 
-botonAzul= Button(seccion2,text="boton azul",fg="blue")
+botonAzul= Button(seccion2,text="boton azul",fg="blue",command=mostrarMensaje)
 botonAzul.grid(row=0, column=0)
 
 botonrojo= Button(seccion2,text="boton rojo",fg="red")
 botonrojo.grid(row=1, column=0)
 
-
-botonrojo= Button(seccion3,text="boton rojo",bg="red")
-botonrojo.pack()
+#boton  
+botonrojov= Button(seccion3,text="boton rojo",bg="red",command= agregarBoton)
+botonrojov.pack()
 
 
 #main de ejecucion de la ventana 
