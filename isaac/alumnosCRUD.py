@@ -1,17 +1,17 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
-from controladorBD import ControladorBD 
+from controladorDB import controladorDB
 
-
-controlador = ControladorBD()
+controlador = controladorDB()
 #3. Función para disparar el botón
 def ejecutaInsert():
-    controlador.guardarUsuario(varNombreNew.get(), varCorNew.get(), varConNew.get())
-
+    controlador.guardarAlumnos(varNombreNew.get(), varCorNew.get(), varConNew.get())
+    
+    
 #Aquí hacemos un def para la selección de datos
 def ejecutaSelectU():
-    usuario = controlador.consultarUsuario(varbus.get()) 
+    usuario = controlador.consultarAlumnos(varbus.get()) 
     for usu in usuario:
         cadena = "Id: " + str(usu[0])+ "\n" + " Nombre: " + usu[1]+ "\n" + " Correo: " + usu[2]+ "\n" + " Contraseña: " + str(usu[3])
     
@@ -23,23 +23,19 @@ def ejecutaSelectU():
 
     else:
         messagebox.showinfo("Error", "No se encontró el usuario")
-
+        
 #CONSULTAR TODOS LOS USUARIOS
 def allSelect():
     tabla.delete(*tabla.get_children())
-    usuarios = controlador.consultarTodosUsuarios()
+    usuarios = controlador.BuscarTodoslosAlumnos()
     for usu in usuarios:
         cadena = "Id: " + str(usu[0])+ "\n" + " Nombre: " + usu[1]+ "\n" + " Correo: " + usu[2]+ "\n" + " Contraseña: " + str(usu[3])
         print(cadena)
         tabla.insert('',0, values=(usu[0],usu[1], usu[2], usu[3]))
 
-#ACTUALIZAR USUARIO
-def ejecutaActualizacion():
-    controlador.actualizarUsuario(varID.get(), varNombre.get(), varCor.get(), varCon.get())
 
-#ELIMINAR USUARIO
-def ejecutaEliminar():
-    controlador.eliminarUsuario(varDeleteID.get())
+
+
 
 
 ventana = Tk()
@@ -56,17 +52,22 @@ pestana3 = ttk.Frame(panel) #tercera pestaña
 pestana4 = ttk.Frame(panel) #cuarta pestaña
 pestana5 = ttk.Frame(panel) #quinta pestaña
 
-
 #Aquí se colocan como tal todas las pestañas
 
-panel.add(pestana1, text='Formulario de usuarios') 
-panel.add(pestana2, text='Buscar usuarios')
-panel.add(pestana3, text='Consultar usuarios')
-panel.add(pestana4, text='Actualizar usuarios')
-panel.add(pestana5, text='Eliminar usuarios')
+panel.add(pestana1, text='Agregar Alumno') 
+panel.add(pestana2, text='Buscar alumno')
+panel.add(pestana3, text='Buscar todos los Alumnos')
+panel.add(pestana4, text='Actualizar Alumno')
+panel.add(pestana5, text='Eliminar Alumno')
 
-#Pestaña 1: Formulario de usuarios
-titulos = Label(pestana1, text="Registro de usuarios", fg = 'blue', font = ("Modern",18)).pack()
+
+#Pestaña 1: Formulario de Alumno
+titulos = Label(pestana1, text="Registro de Alumnos", fg = 'blue', font = ("Modern",18)).pack()
+
+varIDNew = tk.IntVar()
+lblCor = Label(pestana1, text="ID: ").pack()
+txtCor = Entry(pestana1, textvariable=varIDNew)
+txtCor.pack()
 
 varNombreNew = tk.StringVar()
 lblNom = Label(pestana1, text="Nombre: ").pack()
@@ -83,10 +84,14 @@ lblCon = Label(pestana1, text="Contraseña: ").pack()
 txtCon = Entry(pestana1, textvariable=varConNew)
 txtCon.pack()
 
-btnGuardar = Button(pestana1, text="Guardar Usuario", command=ejecutaInsert).pack()
+varGrupNew = tk.IntVar()
+lblCon = Label(pestana1, text="Grupo: ").pack()
+txtCon = Entry(pestana1, textvariable=varGrupNew)
+txtCon.pack()
 
+btnGuardar = Button(pestana1, text="Guardar Usuario",command=ejecutaInsert).pack()
 
-#Pestaña 2. Buscar usuarios
+#Pestaña 2. Buscar Alumno
 
 titulo2= Label(pestana2, text="Buscar usuarios", fg = 'green', font = ("Modern",18)).pack()
 
@@ -114,34 +119,6 @@ botonconsulta = Button(pestana3, text="Consultar", command=allSelect)
 botonconsulta.pack()
 
 
-#Pestaña 4. Actualizar usuarios
-titulo4= Label(pestana4, text="Actualizar usuarios", fg = 'orange', font = ("Modern",18)).pack()
 
-varID = tk.StringVar()
-lblID = Label(pestana4, text="Id: ").pack()
-txtID = Entry(pestana4, textvariable=varID).pack()
-
-varNombre = tk.StringVar()
-lblNom = Label(pestana4, text="Nombre: ").pack()
-txtNom = Entry(pestana4, textvariable=varNombre).pack()
-
-varCor = tk.StringVar()
-lblCor = Label(pestana4, text="Correo: ").pack()
-txtCor = Entry(pestana4, textvariable=varCor).pack()
-
-varCon = tk.StringVar()
-lblCon = Label(pestana4, text="Contraseña: ").pack()
-txtCon = Entry(pestana4, textvariable=varCon).pack()
-
-btnActualizar = Button(pestana4, text="Actualizar Datos", command=ejecutaActualizacion).pack()
-
-#Pestaña 5. Eliminar usuarios
-titulo5= Label(pestana5, text="Eliminar usuarios", fg = 'purple', font = ("Modern",18)).pack()
-
-varDeleteID = tk.StringVar()
-lblID = Label(pestana5, text="Id: ").pack()
-txtID = Entry(pestana5, textvariable=varDeleteID).pack()
-
-btnEliminar = Button(pestana5, text="Eliminar Usuario", command=ejecutaEliminar).pack()
 
 ventana.mainloop()

@@ -1,18 +1,24 @@
+class login:
+    def __init__(self, ma, passw):
+        self.__mail = ma
+        self.__password = passw
 
-from tkinter import Tk,Frame,Button,messagebox,Entry,Label
- 
-class logica:
-  def __init__(self,cor,con):
-     self.__correo=cor
-     self.__contraseña=con
+    def welcome(self):
+        print("El personaje " + self.__mail + " está corriendo")
+        print("La clave es " + self.__password)
 
-  def correov (self,cor,con):
-       correo=input(str("ingresa el correo: "))
-       contraseña=input(str("Ingresa tu contraseña"))
-       if correo == "tonogar@gmail.com" and contraseña == "12345":
-           messagebox.showinfo("aviso","bienvenido")
-       else: 
-          messagebox.showinfo("aviso","Error")
+    #geters y seters
+    def getMail(self):
+        return self.__mail
+    
+    def getPassword(self):
+        return self.__password
+    
+    def setMail(self, ma):
+        self.__mail = ma
+
+    def setPassword(self, passw):
+        self.__password = passw
       
 
       

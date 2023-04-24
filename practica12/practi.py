@@ -1,38 +1,38 @@
+from tkinter import Tk, ttk, Button, messagebox
+from tkinter import *
+from logica import *
 
+def userWelcome():
+    messagebox.showinfo("¡Bienvenido!","Has iniciado sesión correctamente")
 
-from tkinter import Tk,Frame,Button,messagebox,Entry,Label
+def userRejected():
+    messagebox.showerror("ERROR","Un parámetro no es válido. Los patámetros no pueden ser vacíos")
 
-import logica
+validate = False
 
-# def aviso():
-#      if caja1 == "tonogar@gmail.com" and caja2 == "12345":
-#           messagebox.showinfo("aviso","bienvenido")
-#      else:
-#           messagebox.showinfo("aviso","Error")
-        
-#sp=logica()
 ventana = Tk()
-ventana.title("Practica 11: Frames")
-ventana.geometry("300x150")
+ventana.configure(background="#907D6F")
+ventana.title("Práctica 12 - Login")
+ventana.geometry("450x200")
 
-seccion1=Frame(ventana,bg="#D19364")
-seccion1.pack(expand=True,fill="both")
+#grid(row=0, column=0)
 
+emailLabel = Label(ventana, text="Correo").grid(row=0, column=0)
+email = StringVar()
+ttk.emailEntry = Entry(ventana, textvariable=email).grid(row=0, column=1)
 
-etiqueta1=Label(seccion1,text="ingresa tu correo",fg="black")
-etiqueta1.place(x=5, y=20)
+passwordLabel = Label(ventana,text="Contraseña").grid(row=1, column=0)  
+password = StringVar()
+ttk.passwordEntry = Entry(ventana, textvariable=password, show='*').grid(row=1, column=1)
 
-caja1=Entry(seccion1,text="hey",fg="#000")
-caja1.place(x=120, y=50)
+#boton
+def mandar():
+    if password.get() == "" or email.get() == "":
+        messagebox.showinfo("Error","No valido")
+    else:
+        messagebox.showinfo("Bienvenido","Estas dentro")
 
-etiqueta2= Label(seccion1,text="ingresa tu contra",fg="black")
-etiqueta2.place(x=5, y=50)
-
-caja2=Entry(seccion1,text="hey",fg="#000")
-caja2.place(x=120, y=20)
-
-botoncorreo= Button(seccion1,text="login",fg="black")
-botoncorreo.place(x=140, y=100)
-
+log = ttk.Button(ventana, text="Iniciar sesión", command=mandar)
+log.grid(row=4, column=3)
 
 ventana.mainloop()
